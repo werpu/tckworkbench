@@ -1,0 +1,2 @@
+Code stemming from the Eclipse project EPL
+Code from me... ASL2.0 (only the ASL2 code can be taken into other ASL2 projects)
