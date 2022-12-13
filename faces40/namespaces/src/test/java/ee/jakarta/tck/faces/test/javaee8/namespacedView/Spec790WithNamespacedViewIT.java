@@ -43,7 +43,6 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
         WebPage page = getPage("spec790WithNamespacedView.xhtml");
         //we do not have the viewroot in the head atm
         String namingContainerPrefix = getNamingContainerId(page);
-        System.out.println(namingContainerPrefix);
         WebElement form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
         WebElement form1ViewState = form1.findElement(By.name( "jakarta.faces.ViewState"));
         WebElement form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
@@ -86,8 +85,6 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
         System.out.println(page.getPageSource());
         form3Link.click();
         page.waitReqJs(Duration.ofMillis(3000));
-        System.out.println(page.getRequestData());
-        System.out.println(page.getResponseBody());
         namingContainerPrefix = getNamingContainerId(page);
         form1 =  page.findElement(By.id(namingContainerPrefix + "form1"));
         form1ViewState =  form1.findElement(By.name( "jakarta.faces.ViewState"));
@@ -100,9 +97,6 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
         assertTrue(!form3ViewState.getAttribute("value").isEmpty());
     }
 
-    private static String getNamingContainerId(WebPage page) {
-        return page.findElement(By.cssSelector("body > div, body > form")).getAttribute("id").split("(?<=:)", 2)[0];
-    }
 
     /**
      * @see NamingContainer
@@ -133,6 +127,9 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
     }
 
-   
+    private static String getNamingContainerId(WebPage page) {
+        return page.findElement(By.cssSelector("body > div, body > form")).getAttribute("id").split("(?<=:)", 2)[0];
+    }
+
 
 }
