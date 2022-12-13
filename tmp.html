@@ -1,55 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<partial-response id="j_id__v_0">
-    <changes>
-        <update id="form:message"><![CDATA[
-            <div id="form:message">null -&gt; 1</div>
-            ]]>
-        </update>
-        <update id="j_id__v_0:jakarta.faces.ViewState:1"><![CDATA[NjVjNmFjMGU5MjY0OWVmMzAwMDAwMDAx]]></update>
-    </changes>
-</partial-response>
-
-NjVjNmFjMGU5MjY0OWVmMzAwMDAwMDAx
-
-form:repeat:0:list=2
-form:repeat:1:list=3
-form_SUBMIT=1
-jakarta.faces.ViewState=YzNkZjU3NjY2ZjkwYWZjYTAwMDAwMDAx
-jakarta.faces.behavior.event=change
-jakarta.faces.partial.event=change
-jakarta.faces.source=form:repeat:0:list
-jakarta.faces.partial.ajax=true
-form=form
-jakarta.faces.partial.execute=form:repeat:0:list
-jakarta.faces.partial.render=form:message
-
-<input type="hidden" name="jakarta.faces.ViewState" id="j_id__v_0:jakarta.faces.ViewState:1" value="YzNkZjU3NjY2ZjkwYWZjYTAwMDAwMDAx" autocomplete="off">
-
-
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:test="http://testcomponent">
 <head>
-    <title>Issue #3833</title>
     <script type="text/javascript"
-            src="/d01119db-02f5-474e-a4b2-8f8a0146d872/jakarta.faces.resource/faces.js.xhtml;jsessionid=7BA6746687792EA862BB83E43686A71B?ln=jakarta.faces&amp;stage=Development"></script>
+            src="/48d50338-0184-4910-bc01-94b3eb1825eb/jakarta.faces.resource/faces.js.xhtml;jsessionid=0545CF19602EB0E04F1B03D3E8B798E1?ln=jakarta.faces&amp;stage=Development"></script>
 </head>
 <body>
-<form id="form" name="form" method="post"
-      action="/d01119db-02f5-474e-a4b2-8f8a0146d872/issue3833.xhtml;jsessionid=7BA6746687792EA862BB83E43686A71B"
-      enctype="application/x-www-form-urlencoded">
-    <div id="form:message">null -&gt; 1</div>
-    <!-- event="change" doesn't work for HtmlUnit --><select id="form:repeat:0:list" name="form:repeat:0:list" size="2"
-                                                             onchange="myfaces.ab(this,event,'change','','form:message')">
-    <option value="1">1</option>
-    <option value="2">2</option>
-</select>
-    <!-- event="change" doesn't work for HtmlUnit --><select id="form:repeat:1:list" name="form:repeat:1:list" size="2"
-                                                             onchange="myfaces.ab(this,event,'change','','form:message')">
-    <option value="3">3</option>
-    <option value="4">4</option>
-</select><input type="hidden" name="form_SUBMIT" value="1"><input type="hidden" name="jakarta.faces.ViewState"
-                                                                  id="j_id__v_0:jakarta.faces.ViewState:1"
-                                                                  value="NjVjNmFjMGU5MjY0OWVmMzAwMDAwMDAx"
-                                                                  autocomplete="off"></form>
+<script type="text/javascript">
+    var statusUpdate = function statusUpdate(data) {
+        var statusArea = document.getElementById("statusArea");
+        var text = statusArea.innerHTML;
+        text = text + "Name: " + data.source.id;
+        if (data.type === "error") {
+            text = text + " Error: " + data.status + " " + data.errorMessage;
+        }
+        statusArea.innerHTML = text;
+    }
+</script>
+<form id="form" name="form" method="post" action="/48d50338-0184-4910-bc01-94b3eb1825eb/issue2179-page2.xhtml"
+      encType="application/x-www-form-urlencoded">
+
+    <test:input2 id="foo"></test:input2>
+    <input id="form:submit" name="form:submit" type="submit" value="Submit"
+           onClick="faces.util.chain(this, event,function(event){myfaces.ab(this,event,'action','form:submit','@form',{'onerror':statusUpdate})}); return false;">
+    <ul>
+        <li>Warning: The page /issue2179-page2.xhtml declares namespace http://testcomponent and uses the tag
+            test:input2 , but no TagLibrary associated to namespace.
+        </li>
+    </ul>
+    <input type="hidden" name="form_SUBMIT" value="1"><input type="hidden" name="jakarta.faces.ViewState"
+                                                             value="MjhhZWE5N2ZiMTgwZDk0YTAwMDAwMDAx"
+                                                             id="j_id__v_0:jakarta.faces.ViewState:0"></form>
+
+<p>
+</p>
+<h3> Status:</h3>
+<div id="statusArea"></div>
+<p></p>
 <div id="jakarta_faces_developmentstage_messages"></div>
+
 </body>
 </html>

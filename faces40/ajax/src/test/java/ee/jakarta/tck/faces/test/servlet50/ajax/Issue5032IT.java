@@ -38,7 +38,6 @@ public class Issue5032IT extends BaseITNG {
         WebPage page = getPage("issue5032IT.xhtml");
 
         ExtendedTextInput form1input2 = new ExtendedTextInput( getWebDriver(), page.findElement(By.id("form1:inputs:input2")));
-        assertEquals("f:ajax execute of form1:input2 is implied as @this", "mojarra.ab(this,event,'valueChange',0,'@form')", form1input2.getAttribute("onchange"));
 
         form1input2.setValue("1");
         form1input2.fireEvent("change");
@@ -57,7 +56,6 @@ public class Issue5032IT extends BaseITNG {
         WebPage page = getPage("issue5032IT.xhtml");
 
         ExtendedTextInput form2input2 = new ExtendedTextInput( getWebDriver(), page.findElement(By.id("form2:inputs:input2")));
-        assertEquals("f:ajax execute of form2:input2 is still @this", "mojarra.ab(this,event,'valueChange','@this','@form')", form2input2.getAttribute("onchange"));
 
         form2input2.setValue("1");
         form2input2.fireEvent("change");
