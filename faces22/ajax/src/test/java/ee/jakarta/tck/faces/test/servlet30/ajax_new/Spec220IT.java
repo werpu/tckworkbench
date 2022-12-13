@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -38,24 +38,21 @@ public class Spec220IT extends BaseITNG {
     public void testViewState() throws Exception {
         WebPage page = getPage("viewState1.xhtml");
         ExtendedTextInput textField = new ExtendedTextInput(getWebDriver(), page.findElement(By.id("firstName")));
-        //we need to clear out the textfield first, it has a preset value of Duke
         textField.setValue("ajaxFirstName");
-
+        
         WebElement button = page.findElement(By.id("submitAjax"));
         button.click();
-
-        Thread.sleep(2000);
-
-        assertTrue(page.isInPageText("|ajaxFirstName|"));
+        page.waitReqJs();
+        String pageText = page.getPageSource();
+        assertTrue(pageText.contains("|ajaxFirstName|"));
 
         textField = new ExtendedTextInput(getWebDriver(), page.findElement(By.id("firstName")));
         textField.setValue("nonAjaxFirstName");
-
-        button = page.findElement(By.id("submitNonAjax"));
+        
+        button = new ExtendedTextInput(getWebDriver(), page.findElement(By.id("submitNonAjax")));
         button.click();
-
-        Thread.sleep(2000);
-        assertTrue(page.isInPageText("|nonAjaxFirstName|"));
+        page.waitReqJs();
+        pageText = page.getPageSource();
+        assertTrue(pageText.contains("|nonAjaxFirstName|"));
     }
-
 }

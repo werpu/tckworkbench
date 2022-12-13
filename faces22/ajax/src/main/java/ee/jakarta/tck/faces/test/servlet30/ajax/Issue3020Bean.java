@@ -15,13 +15,13 @@
  */
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
+    
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Named
 @RequestScoped

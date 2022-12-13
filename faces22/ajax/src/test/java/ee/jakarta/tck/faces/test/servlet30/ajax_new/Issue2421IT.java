@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -30,8 +30,8 @@ public class Issue2421IT extends BaseITNG {
 
     /**
      * This test verifies that an attribute named 'disabled' can be successfully updated
-     * from a partial response (over Ajax).
-     *
+     * from a partial response (over Ajax). 
+     * 
      * @see AjaxBehavior
      * @see HtmlCommandButton#isDisabled()
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2425
@@ -41,11 +41,10 @@ public class Issue2421IT extends BaseITNG {
         WebPage page = getPage("attributeNameIsDisabled.xhtml");
         WebElement input = page.findElement(By.id("form1:foo"));
         assertTrue(input.isEnabled());
-        assertTrue(page.getPageSource().contains("foo"));
+        assertTrue(page.isInPage("foo"));
         WebElement button = page.findElement(By.id("form1:button"));
         button.click();
-        page.waitForCurrentRequestEnd();
-        Thread.sleep(3000);
+        page.waitReqJs();
         input = page.findElement(By.id("form1:foo"));
         assertTrue(input.isEnabled());
     }

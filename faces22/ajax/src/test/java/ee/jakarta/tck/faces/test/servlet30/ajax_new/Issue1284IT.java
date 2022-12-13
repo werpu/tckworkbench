@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -16,7 +16,6 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax_new;
 
-
 import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
@@ -25,7 +24,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class Issue1284IT extends BaseITNG {
 
@@ -37,8 +36,8 @@ public class Issue1284IT extends BaseITNG {
     @Test
     public void testCdataEscape5() throws Exception {
         WebPage page = getPage("issue1284.xhtml");
-        assertEquals("", page.findElement(By.id("form1:out1")).getText());
-        assertEquals("", page.findElement(By.id("form1:in1")).getAttribute("value"));
+        assertTrue(page.findElement(By.id("form1:out1")).getText().equals("")); 
+        assertTrue(page.findElement(By.id("form1:in1")).getText().equals("")); 
 
         WebElement in1 = page.findElement(By.id("form1:in1"));
         in1.sendKeys("[");
@@ -46,10 +45,11 @@ public class Issue1284IT extends BaseITNG {
         // Submit the ajax request
         WebElement button1 = page.findElement(By.id("form1:button1"));
         button1.click();
-        Thread.sleep(3000);
+        page.waitReqJs();
+
 
         // Check that the ajax request succeeds
-        assertEquals("[", page.findElement(By.id("form1:out1")).getText());
+        assertTrue(page.findElement(By.id("form1:out1")).getText().equals("[")); 
     }
 
     /**
@@ -60,8 +60,8 @@ public class Issue1284IT extends BaseITNG {
     @Test
     public void testCdataEscape6() throws Exception {
         WebPage page = getPage("issue1284.xhtml");
-        assertEquals("", page.findElement(By.id("form1:out1")).getText());
-        assertEquals("", page.findElement(By.id("form1:in1")).getAttribute("value"));
+        assertTrue(page.findElement(By.id("form1:out1")).getText().equals("")); 
+        assertTrue(page.findElement(By.id("form1:in1")).getText().equals("")); 
 
         WebElement in1 = page.findElement(By.id("form1:in1"));
         in1.sendKeys("var a=[");
@@ -69,9 +69,10 @@ public class Issue1284IT extends BaseITNG {
         // Submit the ajax request
         WebElement button1 = page.findElement(By.id("form1:button1"));
         button1.click();
-        Thread.sleep(3000);
+        page.waitReqJs();
+
 
         // Check that the ajax request succeeds
-        assertEquals("var a=[", page.findElement(By.id("form1:out1")).getText());
+        assertTrue(page.findElement(By.id("form1:out1")).getText().equals("var a=[")); 
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -21,6 +21,7 @@ import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class Issue1817IT extends BaseITNG {
 
@@ -46,10 +48,12 @@ public class Issue1817IT extends BaseITNG {
         for (String[] id : ids) {
             WebElement anchor = page.findElement(By.id(id[0]));
             anchor.click();
+            page.waitReqJs();
             String expectedText = "Triggered item: " + id[1];
             WebElement body = page.findElement(By.tagName("body"));
-            page.waitForCondition(ExpectedConditions.textToBePresentInElement(body, expectedText), Duration.ofMillis(3000));
-            assertTrue(page.getPageSource().contains(expectedText));
+            page.waitForCondition(wd -> page.isInPage(expectedText), WebPage.STD_TIMEOUT);
+            assertTrue(page.isInPage(expectedText));
         }
     }
 }
+

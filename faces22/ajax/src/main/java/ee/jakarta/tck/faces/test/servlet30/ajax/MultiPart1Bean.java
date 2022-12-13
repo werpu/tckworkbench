@@ -16,11 +16,11 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.Serializable;
+
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Named;
-
-import java.io.Serializable;
 
 @Named
 @ViewScoped

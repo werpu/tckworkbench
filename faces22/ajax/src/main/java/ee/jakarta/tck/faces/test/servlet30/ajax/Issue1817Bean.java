@@ -16,11 +16,11 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Named;
 
 @Named
 @RequestScoped

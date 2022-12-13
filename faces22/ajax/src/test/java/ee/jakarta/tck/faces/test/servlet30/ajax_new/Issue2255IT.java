@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -36,16 +36,23 @@ public class Issue2255IT extends BaseITNG {
     @Test
     public void testBehaviorState() throws Exception {
         WebPage page = getPage("divInComposite.xhtml");
-
-        assertTrue(page.getPageSource().contains("false"));
-        WebElement cbox = page.findElement(By.id("cc:form:test"));
+        assertTrue(page.isInPage("false"));
+        WebElement cbox =  page.findElement(By.id("cc:form:test"));
         cbox.click();
+        page.waitReqJs();
+
         assertTrue(page.isInPage("true"));
         cbox.click();
+        page.waitReqJs();
+
         assertTrue(page.isInPage("false"));
         cbox.click();
+        page.waitReqJs();
+
         assertTrue(page.isInPage("true"));
         cbox.click();
+        page.waitReqJs();
+
         assertTrue(page.isInPage("false"));
     }
 }

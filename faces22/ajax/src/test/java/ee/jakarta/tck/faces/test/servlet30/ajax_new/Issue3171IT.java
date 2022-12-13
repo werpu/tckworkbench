@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
+
 import static org.junit.Assert.assertTrue;
 
 public class Issue3171IT extends BaseITNG {
@@ -32,9 +34,13 @@ public class Issue3171IT extends BaseITNG {
      * @see https://github.com/eclipse-ee4j/mojarra/issues/3175
      */
     @Test
-    public void testExceptionDuringRenderOk() {
+    public void testExceptionDuringRenderOk() throws Exception {
         WebPage page = getPage("exceptionDuringRender.xhtml");
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         String pageText = page.getPageSource();
 
         assertTrue(pageText.contains("not an ajax request"));
@@ -50,6 +56,6 @@ public class Issue3171IT extends BaseITNG {
 
         assertTrue(page.isInPageText("not an ajax request"));
         assertTrue(page.isInPageText("Error from submit"));
-
+        
     }
 }

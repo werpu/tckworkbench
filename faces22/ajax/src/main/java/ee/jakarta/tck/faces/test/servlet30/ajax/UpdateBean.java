@@ -16,15 +16,15 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.FacesException;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.context.PartialResponseWriter;
 import jakarta.inject.Named;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Named
 @RequestScoped

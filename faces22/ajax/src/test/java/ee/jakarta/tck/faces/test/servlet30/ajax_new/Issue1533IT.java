@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -19,12 +19,12 @@ package ee.jakarta.tck.faces.test.servlet30.ajax_new;
 import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
-import jakarta.faces.component.html.HtmlSelectOneRadio;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
+
 
 /**
  * @author Manfred Riem (manfred.riem@oracle.com)
@@ -33,7 +33,7 @@ public class Issue1533IT extends BaseITNG {
 
     /**
      * @see AjaxBehavior
-     * @see HtmlSelectOneRadio
+     * @see WebElementOneRadio
      * @see https://github.com/eclipse-ee4j/mojarra/issues/1537
      */
     @Test
@@ -41,11 +41,13 @@ public class Issue1533IT extends BaseITNG {
         WebPage page = getPage("issue1533.xhtml");
         WebElement input = page.findElement(By.id("form:vip:0"));
         input.click();
-        Thread.sleep(3000);
+        page.waitReqJs();
+
         assertTrue(page.getPageSource().indexOf("form:vip-true") != -1);
-        input = page.findElement(By.id("form:vip:1"));
+        input =  page.findElement(By.id("form:vip:1"));
         input.click();
-        Thread.sleep(3000);
+        page.waitReqJs();
+
         assertTrue(page.getPageSource().indexOf("form:vip-false") != -1);
     }
 }

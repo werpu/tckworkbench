@@ -16,16 +16,16 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Iterator;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.component.EditableValueHolder;
 import jakarta.faces.component.UIComponent;
 import jakarta.faces.component.UIForm;
 import jakarta.faces.event.ActionEvent;
 import jakarta.inject.Named;
-
-import java.io.Serializable;
-import java.util.Date;
-import java.util.Iterator;
 
 @Named
 @SessionScoped

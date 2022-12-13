@@ -16,12 +16,12 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Vector;
+
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
 
 @Named
 @SessionScoped

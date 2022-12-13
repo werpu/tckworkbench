@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -20,6 +20,8 @@ import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,17 +32,15 @@ public class Issue2439IT extends BaseITNG {
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2443
      */
     @Test
-    public void testUpdateAttributeNamedValue() {
-        // change in the rendering due to a different engine, we probably would be
-        // better off checking the dom elements directly
-        String expectedString1 = "<input id=\"form1:input1\" type=\"text\" name=\"form1:input1\">";
-        String expectedString2 = "<input id=\"form1:input2\" type=\"text\" name=\"form1:input2\" onchange=\"faces.util.chain(this,event,'mojarra.ab(this,event,\\'valueChange\\',\\'@this\\',\\'@all\\')')\">";
-        String expectedString3 = "<input id=\"form1:input3\" type=\"text\" name=\"form1:input3\" onchange=\"faces.util.chain(this,event,'alert(\\'Hello, World!\\');')\">";
-
+    public void testDisabledBehaviors() throws Exception {
         WebPage page = getPage("disabledBehaviors.xhtml");
-        assertTrue(page.isInPage(expectedString1));
-        assertTrue(page.isInPage(expectedString2));
-        assertTrue(page.isInPage(expectedString3));
+        
+        WebElement input1 = page.findElement(By.id("form1:input1"));
+        WebElement input2 = page.findElement(By.id("form1:input2"));
+        WebElement input3 = page.findElement(By.id("form1:input3"));
+        assertTrue("input1 has no onchange attribute", input1.getAttribute("onchange") == null || input1.getAttribute("onchange").isEmpty());
+        assertTrue("input2 has onchange attribute", input1.getAttribute("onchange") != null && !input2.getAttribute("onchange").isEmpty());
+        assertTrue("input3 has onchange attribute", input3.getAttribute("onchange") != null && !input3.getAttribute("onchange").isEmpty());
     }
 }
 

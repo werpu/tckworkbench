@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -31,16 +31,15 @@ public class Issue2648IT extends BaseITNG {
      * @see AjaxBehavior
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2652
      */
-    //failing, time elapse
     @Test
-    public void testIssue2648() {
+    public void testIssue2648() throws Exception {
+        boolean exceptionThrown = false;
         WebPage page = getPage("issue2648.xhtml");
-
         WebElement input = page.findElement(By.id("form:button"));
         input.click();
         page.waitReqJs();
+        page.waitReqJs();
         page = getPage("issue2648-1.xhtml");
-
         assertTrue(page.isInPage("IllegalStateException: true"));
     }
 }

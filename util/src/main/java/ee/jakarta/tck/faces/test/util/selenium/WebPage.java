@@ -81,6 +81,21 @@ public class WebPage {
     }
 
     /**
+     * simple wait
+     * @param timeout
+     */
+    public void wait(Duration timeout) {
+        try {
+            synchronized (webDriver) {
+                webDriver.wait(timeout.toMillis());
+            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    /**
      * waits until no more running requests are present
      * in case of exceeding our STD_TIMEOUT, a runtime exception is thrown
      */
@@ -148,7 +163,10 @@ public class WebPage {
      */
     public boolean isInPageText(String text) {
         try {
-            waitForCondition(webDriver1 -> webDriver.getPageText().contains(text), STD_TIMEOUT);
+            //values are not returned by getPageText
+            String values = getInputValues();
+
+            waitForCondition(webDriver1 -> (webDriver.getPageText() + values).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException ex) {
             //timeout is wanted in this case and should result in a false
@@ -158,7 +176,8 @@ public class WebPage {
 
     public boolean isInPageTextReduced(String text) {
         try {
-            waitForCondition(webDriver1 -> webDriver.getPageTextReduced().contains(text), STD_TIMEOUT);
+            String values = getInputValues();
+            waitForCondition(webDriver1 -> (webDriver.getPageTextReduced() + values.replaceAll("\\s+", " ")).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException ex) {
             //timeout is wanted in this case and should result in a false
@@ -183,12 +202,20 @@ public class WebPage {
      */
     public boolean isNotInPageText(String text) {
         try {
-            waitForCondition(webDriver1 -> !webDriver.getPageText().contains(text), STD_TIMEOUT);
+            String values = getInputValues();
+            waitForCondition(webDriver1 -> !(webDriver.getPageText() + values).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException ex) {
             //timeout is wanted in this case and should result in a false
             return false;
         }
+    }
+
+    private String getInputValues() {
+        return webDriver.findElements(By.cssSelector("input, textarea, select"))
+                .stream()
+                .map(webElement -> webElement.getAttribute("value"))
+                .reduce("", (str1, str2) -> str1 + " " + str2);
     }
 
     /**
@@ -200,7 +227,8 @@ public class WebPage {
      */
     public boolean isInPage(String text) {
         try {
-            waitForCondition(webDriver1 -> webDriver.getPageSource().contains(text), STD_TIMEOUT);
+            String values = getInputValues();
+            waitForCondition(webDriver1 -> (webDriver.getPageSource() + values).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException ex) {
             //timeout is wanted in this case and should result in a false
@@ -219,7 +247,8 @@ public class WebPage {
      */
     public boolean isNotInPage(String text) {
         try {
-            waitForCondition(webDriver1 -> !webDriver.getPageSource().contains(text), STD_TIMEOUT);
+            String values = getInputValues();
+            waitForCondition(webDriver1 -> !(webDriver.getPageSource() + values).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException ex) {
             //timeout is wanted in this case and should result in a false
@@ -239,7 +268,8 @@ public class WebPage {
      */
     public boolean isInPage(String text, boolean allowExceptions) {
         try {
-            waitForCondition(webDriver1 -> webDriver.getPageSource().contains(text), STD_TIMEOUT);
+            String values = getInputValues();
+            waitForCondition(webDriver1 -> (webDriver.getPageSource() + values).contains(text), STD_TIMEOUT);
             return true;
         } catch (TimeoutException exception) {
             if(allowExceptions) {

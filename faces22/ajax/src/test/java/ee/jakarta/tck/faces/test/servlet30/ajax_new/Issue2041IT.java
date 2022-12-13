@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -17,14 +17,11 @@
 package ee.jakarta.tck.faces.test.servlet30.ajax_new;
 
 import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
-import ee.jakarta.tck.faces.test.util.selenium.ExtendedWebDriver;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
@@ -41,22 +38,20 @@ public class Issue2041IT extends BaseITNG {
     public void testIssue2041() throws Exception {
         WebPage page = getPage("issue2041.xhtml");
 
-        assertTrue(page.getPageSource().indexOf("PAGE 1 BEGIN") != -1);
-        assertTrue(page.getPageSource().indexOf("PAGE 1 END") != -1);
+        assertTrue(page.isInPage("PAGE 1 BEGIN"));
+        assertTrue(page.isInPage("PAGE 1 END"));
 
-
-        WebElement anchor = page.findElement(By.id("commandLink"));
+        WebElement anchor =  page.findElement(By.id("commandLink"));
         anchor.click();
-    ;
-        page.waitReqJs(Duration.ofMillis(3000));
+        page.waitReqJs();
         updatePage();
 
-        assertTrue(page.getPageSource().indexOf("PAGE 2 BEGIN") != -1);
-        assertTrue(page.getPageSource().indexOf("PAGE 2 END") != -1);
+        assertTrue(page.isInPage("PAGE 2 BEGIN"));
+        assertTrue(page.isInPage("PAGE 2 END"));
 
-        anchor = page.findElement(By.id("commandLink"));
+        anchor =  page.findElement(By.id("commandLink"));
         anchor.click();
-        page.waitReqJs(Duration.ofMillis(3000));
+        page.waitReqJs();
 
         assertTrue(page.getPageSource().indexOf("PAGE 1 BEGIN") != -1);
         assertTrue(page.getPageSource().indexOf("PAGE 1 END") != -1);

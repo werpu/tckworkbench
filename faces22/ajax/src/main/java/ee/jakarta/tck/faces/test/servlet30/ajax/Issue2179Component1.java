@@ -16,11 +16,11 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.IOException;
+
 import jakarta.faces.component.FacesComponent;
 import jakarta.faces.component.UIInput;
 import jakarta.faces.context.FacesContext;
-
-import java.io.IOException;
 
 @FacesComponent( value = "com.sun.faces.test.servlet30.ajax.Issue2179Component1" )
 public class Issue2179Component1 extends UIInput {

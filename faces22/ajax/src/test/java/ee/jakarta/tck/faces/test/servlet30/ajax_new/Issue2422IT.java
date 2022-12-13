@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -19,21 +19,21 @@ package ee.jakarta.tck.faces.test.servlet30.ajax_new;
 import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
-import jakarta.faces.component.html.HtmlSelectManyCheckbox;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static org.junit.Assert.assertTrue;
 
+
 public class Issue2422IT extends BaseITNG {
 
     /**
      * This test verifies correct function of SelectManyCheckbox in a Composite
-     * Component over Ajax.
-     *
+     * Component over Ajax. 
+     * 
      * @see AjaxBehavior
-     * @see HtmlSelectManyCheckbox
+     * @see WebElementManyCheckbox
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2425
      */
     @Test
@@ -41,9 +41,13 @@ public class Issue2422IT extends BaseITNG {
         WebPage page = getPage("selectBooleanCheckbox.xhtml");
         WebElement cbox = page.findElement(By.id("checkbox"));
         // This will ensure JavaScript finishes before evaluating the page.
-        assertTrue(page.isCondition(webDriver1 -> !cbox.isSelected()));
+        page.waitReqJs();
+        assertTrue(!cbox.isSelected());
 
         cbox.click();
-        assertTrue(page.isCondition(webDriver1 -> cbox.isSelected()));
+        page.waitReqJs();
+        page.waitReqJs();
+        assertTrue(cbox.isSelected());
+
     }
 }

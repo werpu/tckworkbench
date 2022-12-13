@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -27,7 +27,7 @@ import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertTrue;
 
 public class Issue2179IT extends BaseITNG {
-
+    
     /**
      * @see PartialViewContext
      * @see ExceptionHandler
@@ -50,11 +50,12 @@ public class Issue2179IT extends BaseITNG {
         // the major change is to shift the textarea over
         // apparently they used the text attribute which does not work
         // on new browsers, innerText must be used
-        // or a div with innerHTML which always will work
+        // or a div with innerHTML which always will work, also value does work
         WebPage page = getPage("issue2179-page2.xhtml");
         WebElement button = page.findElement(By.id("form:submit"));
         button.click();
-        page.waitReqJs();
-        assertTrue(page.isInPage("Name: form:submit Error: serverError"));
+        //page.waitReqJs();
+
+        assertTrue(page.isInPageTextReduced("Name: form:submit Error: serverError"));
     }
 }

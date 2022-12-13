@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 <!--
 
     Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
@@ -17,38 +18,38 @@
 
 -->
 
-<h:html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://java.sun.com/jsf/core" 
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<h:head>
-	</h:head>
-	
-	<h:body>
+<h:head>
+</h:head>
 
-           <h:form id="topform">
-		
-              <ui:repeat value="#{issue2636Bean.values}" var="val">
-                  <h:commandLink action="#{issue2636Bean.linkAction1()}" value="#{val}">
-                     <f:ajax render=":topform:content :topform:out" />
-                  </h:commandLink>
-              </ui:repeat>
-		
-              <h:panelGroup id="content" layout="block">
-                 <ui:repeat value="#{issue2636Bean.values}" var="val">
-                     <h:commandLink action="#{issue2636Bean.linkAction2()}" value="#{val}">
-                        <f:ajax render=":topform:content :topform:out" />
-                     </h:commandLink>
-                 </ui:repeat>
-              </h:panelGroup>
+<h:body>
 
-              <br/>
+    <h:form id="topform">
 
-              <h:outputText id="out" value="#{issue2636Bean.actionText}"/>
+        <ui:repeat value="#{issue2636Bean.values}" var="val">
+            <h:commandLink action="#{issue2636Bean.linkAction1()}" value="#{val}">
+                <f:ajax render=":topform:content :topform:out" />
+            </h:commandLink>
+        </ui:repeat>
 
-           </h:form>
-	
-	</h:body>
+        <h:panelGroup id="content" layout="block">
+            <ui:repeat value="#{issue2636Bean.values}" var="val">
+                <h:commandLink action="#{issue2636Bean.linkAction2()}" value="#{val}">
+                    <f:ajax render=":topform:content :topform:out" />
+                </h:commandLink>
+            </ui:repeat>
+        </h:panelGroup>
 
-</h:html>
+        <br/>
+
+        <h:outputText id="out" value="#{issue2636Bean.actionText}"/>
+
+    </h:form>
+
+</h:body>
+
+</html>

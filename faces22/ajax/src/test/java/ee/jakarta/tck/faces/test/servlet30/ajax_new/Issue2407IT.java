@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -30,8 +30,8 @@ public class Issue2407IT extends BaseITNG {
 
     /**
      * This test verifies that an attribute named 'value' can be successfully updated
-     * from a partial response (over Ajax).
-     *
+     * from a partial response (over Ajax). 
+     * 
      * @see AjaxBehavior
      * @see HtmlCommandButton#getValue()
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2411

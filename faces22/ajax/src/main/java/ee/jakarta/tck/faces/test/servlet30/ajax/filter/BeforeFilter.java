@@ -16,16 +16,18 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax.filter;
 
-import jakarta.faces.context.PartialResponseWriter;
-import jakarta.faces.context.ResponseWriter;
-import jakarta.servlet.*;
-import jakarta.servlet.http.HttpServletResponse;
-import org.apache.myfaces.renderkit.html.HtmlResponseWriterImpl;
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Writer;
-import java.lang.reflect.Constructor;
+
+import jakarta.faces.context.PartialResponseWriter;
+import jakarta.faces.context.ResponseWriter;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class BeforeFilter implements Filter {
     
@@ -43,13 +45,7 @@ public class BeforeFilter implements Filter {
         try {
             HttpServletResponse resp = (HttpServletResponse) response;
             PrintWriter pw = resp.getWriter();
-
-            //ResponseWriter responseWriter;
-            //Class htmlResponseWriterClass = Class.forName("org.apache.myfaces.renderkit.html.HtmlResponseWriterImpl");
-
-            ResponseWriter responseWriter = new HtmlResponseWriterImpl(pw, "text/xml", "UTF-8");
-            //Constructor ctor = htmlResponseWriterClass.getConstructor(Writer.class, String.class, String.class);
-            //responseWriter = (ResponseWriter) ctor.newInstance(pw, "text/xml", "UTF-8");
+            ResponseWriter responseWriter = new CustomResponseWriter(pw, "text/xml", "UTF-8");
             PartialResponseWriter partialResponseWriter = new PartialResponseWriter(responseWriter);
 //            partialResponseWriter.writePreamble("<?xml version='1.0' encoding='UTF-8'?>\n");
             partialResponseWriter.startDocument();

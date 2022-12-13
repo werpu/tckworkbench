@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,17 +34,17 @@ public class Issue2754IT extends BaseITNG {
     @Test
     public void testAjaxViewScope() throws Exception {
         WebPage page = getPage("issue2754.xhtml");
-
-        WebElement input;
+        WebElement input = page.findElement(By.id("input"));
         WebElement button = page.findElement(By.id("button"));
         button.click();
         page.waitReqJs();
-        assertTrue(page.isInPage("<ul id=\"messages\"><li>"));
+        assertTrue(page.isInPage("input: Validation Error: Value is required"));
         input = page.findElement(By.id("input"));
         input.sendKeys("hello");
+        page.waitReqJs();
         button = page.findElement(By.id("button"));
         button.click();
         page.waitReqJs();
-        assertTrue(page.isNotInPage("<ul id=\"messages\"><li>"));
+        assertTrue(!page.isInPage("input: Validation Error: Value is required"));
     }
 }

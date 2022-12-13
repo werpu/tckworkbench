@@ -16,10 +16,10 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.Serializable;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-
-import java.io.Serializable;
 
 @Named
 @SessionScoped

@@ -16,14 +16,14 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.Serializable;
+import java.util.Iterator;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.AbortProcessingException;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Named;
-
-import java.io.Serializable;
-import java.util.Iterator;
 
 @Named
 @SessionScoped

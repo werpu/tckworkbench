@@ -17,45 +17,45 @@
 -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:test="http://testcomponent">
 
-     <h:head></h:head>
-      
-      <h:body>
-             <script type="text/javascript">
-              var statusUpdate = function statusUpdate(data) {
-                 var statusArea = document.getElementById("statusArea");
-                 var text = statusArea.innerHTML;
-                 text = text + "Name: "+data.source.id;
-                 if (data.type === "error") {
-                     text = text + " Error: "+data.status+" "+data.errorMessage;
-                 }
-                 statusArea.innerHTML = text;
-              }
-            </script>
+<h:head></h:head>
 
-            <h:form id="form">
-            
-                <test:input2 id="foo"/>
+<h:body>
+    <script type="text/javascript">
+        var statusUpdate = function statusUpdate(data) {
+            var statusArea = document.getElementById("statusArea");
+            var text = statusArea.value;
+            text = text + "Name: "+data.source.id;
+            if (data.type === "error") {
+                text = text + " Error: "+data.status+" "+data.errorMessage;
+            }
+            statusArea.value = text;
+        }
+    </script>
 
-                <h:commandButton id="submit" value="Submit">
-                   <f:ajax execute="foo" render ="@form" onerror="statusUpdate"/>
-                </h:commandButton>
+    <h:form id="form">
 
-                <h:messages/>
+        <test:input2 id="foo"/>
 
-            </h:form>
+        <h:commandButton id="submit" value="Submit">
+            <f:ajax execute="foo" render ="@form" onerror="statusUpdate"/>
+        </h:commandButton>
 
-            <p>
-              <h3> Status:</h3>
-              <div id="statusArea"  />
-            </p>
+        <h:messages/>
 
-      </h:body>
+    </h:form>
+
+    <p>
+        <h3> Status:</h3>
+        <textarea id="statusArea" cols="40" rows="10" readonly="readonly" />
+    </p>
+
+</h:body>
 
 </html>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -23,8 +23,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import java.time.Duration;
-
 import static org.junit.Assert.assertTrue;
 
 public class Issue3833IT extends BaseITNG {
@@ -43,20 +41,23 @@ public class Issue3833IT extends BaseITNG {
 
 
         select1.selectByIndex(0);
-        page.waitReqJs();
+        page.waitForCurrentRequestEnd();
+        Thread.sleep(3000);
         assertTrue(page.findElement(By.id("form:message")).getText().equals("null -> 1"));
 
         select2.selectByIndex(0);
-        page.waitReqJs();
+        page.waitForCurrentRequestEnd();
+        Thread.sleep(3000);
         assertTrue(page.findElement(By.id("form:message")).getText().equals("null -> 3"));
 
         select1.selectByIndex(1);
-        page.waitReqJs();
-        //getting null -> 3
+        page.waitForCurrentRequestEnd();
+        Thread.sleep(3000);
         assertTrue(page.findElement(By.id("form:message")).getText().equals("1 -> 2"));
 
         select2.selectByIndex(1);
-        page.waitReqJs();
+        page.waitForCurrentRequestEnd();
+        Thread.sleep(3000);
         assertTrue(page.findElement(By.id("form:message")).getText().equals("3 -> 4"));
     }
 }

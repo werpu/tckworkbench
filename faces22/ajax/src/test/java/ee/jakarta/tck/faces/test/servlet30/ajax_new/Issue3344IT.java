@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,12 +34,12 @@ public class Issue3344IT extends BaseITNG {
     @Test
     public void testXmlPreambleOnRedirect() throws Exception {
         WebPage page = getPage("ajaxRedirect01.xhtml");
-
+        
         WebElement button = page.findElement(By.id("button"));
         button.click();
-        page.waitForCurrentRequestEnd();
-
-        Thread.sleep(3000);
+        page.waitReqJs();
+        
+        page.waitReqJs();
         assertTrue(page.isInPage("&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;"));
     }
 }

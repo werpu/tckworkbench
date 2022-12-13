@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -34,10 +34,11 @@ public class Issue2767IT extends BaseITNG {
     @Test
     public void testCommandLinkRadio() throws Exception {
         WebPage page = getPage("issue2767.xhtml");
-        // This will ensure JavaScript finishes before evaluating the page.
-
         WebElement anchor = page.findElement(By.id("testLink"));
+        // This will ensure JavaScript finishes before evaluating the page.
+        page.waitReqJs();
         anchor.click();
+        page.waitReqJs();
         page.waitReqJs();
         assertTrue(page.isInPage("LINK ACTION"));
         WebElement radio1 = page.findElement(By.id("testRadio:0"));
@@ -46,13 +47,16 @@ public class Issue2767IT extends BaseITNG {
 
         radio1.click();
         page.waitReqJs();
+        page.waitReqJs();
         assertTrue(page.isInPage("RADIO:red"));
 
         radio2.click();
         page.waitReqJs();
+        page.waitReqJs();
         assertTrue(page.isInPage("RADIO:blue"));
 
         radio3.click();
+        page.waitReqJs();
         page.waitReqJs();
         assertTrue(page.isInPage("RADIO:white"));
     }

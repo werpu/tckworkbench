@@ -48,12 +48,15 @@ public class Issue2408IT extends BaseITNG {
         assertTrue(page.getPageSource().contains("Status: Pending"));
 
         getCheckBoxes(page).get(0).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1"));
 
         getCheckBoxes(page).get(1).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2"));
 
         getCheckBoxes(page).get(2).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2 mcheck-3"));
     }
 
@@ -70,14 +73,17 @@ public class Issue2408IT extends BaseITNG {
 
         WebElement cbox1 = page.findElement(By.id("form:compId:cbox:0"));
         cbox1.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1"));
 
         WebElement cbox2 = page.findElement(By.id("form:compId:cbox:1"));
         cbox2.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2"));
 
         WebElement cbox3 = page.findElement(By.id("form:compId:cbox:2"));
         cbox3.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2 mcheck-3"));
     }
 
@@ -92,12 +98,15 @@ public class Issue2408IT extends BaseITNG {
         assertTrue(page.getPageSource().contains("Status: Pending"));
 
         getCheckBoxes(page).get(0).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1"));
 
         getCheckBoxes(page).get(1).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2"));
 
         getCheckBoxes(page).get(2).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: mcheck-1 mcheck-2 mcheck-3"));
     }
 
@@ -113,12 +122,15 @@ public class Issue2408IT extends BaseITNG {
         assertTrue(page.isInPage("Status: Pending"));
 
         getRadios(page).get(0).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-1"));
 
         getRadios(page).get(1).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-2"));
 
         getRadios(page).get(2).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-3"));
     }
 
@@ -135,14 +147,17 @@ public class Issue2408IT extends BaseITNG {
 
         WebElement radio1 = page.findElement(By.id("form:compId:radio:0"));
         radio1.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-1"));
 
         WebElement radio2 = page.findElement(By.id("form:compId:radio:1"));
         radio2.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-2"));
 
         WebElement radio3 = page.findElement(By.id("form:compId:radio:2"));
         radio3.click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-3"));
     }
 
@@ -157,12 +172,15 @@ public class Issue2408IT extends BaseITNG {
         assertTrue(page.isInPage("Status: Pending"));
 
         getRadios(page).get(0).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-1"));
 
         getRadios(page).get(1).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-2"));
 
         getRadios(page).get(2).click();
+        page.waitReqJs();
         assertTrue(page.isInPage("Status: radio-3"));
     }
 

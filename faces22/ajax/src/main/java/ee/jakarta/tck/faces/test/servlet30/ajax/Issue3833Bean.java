@@ -16,13 +16,13 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
-import jakarta.enterprise.context.RequestScoped;
-import jakarta.faces.event.ValueChangeEvent;
-import jakarta.inject.Named;
-
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.event.ValueChangeEvent;
+import jakarta.inject.Named;
 
 @Named
 @RequestScoped

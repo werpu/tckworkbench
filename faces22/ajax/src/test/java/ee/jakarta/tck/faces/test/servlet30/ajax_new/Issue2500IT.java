@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -37,13 +37,14 @@ public class Issue2500IT extends BaseITNG {
         WebElement button1 = page.findElement(By.id("btn5"));
         button1.click();
         page.waitReqJs();
+        page.waitReqJs();
         WebElement button2 = page.findElement(By.id("button1"));
         button2.click();
         page.waitReqJs();
+        page.waitReqJs();
         button2.click();
+        page.waitReqJs();
         page.waitReqJs();
         assertTrue(page.isInPage("jakarta.faces.ViewState Has One Value"));
     }
-
-
 }

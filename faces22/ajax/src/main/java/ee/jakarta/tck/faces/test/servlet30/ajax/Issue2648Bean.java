@@ -16,6 +16,8 @@
 
 package ee.jakarta.tck.faces.test.servlet30.ajax;
 
+import java.io.Serializable;
+
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
@@ -24,8 +26,6 @@ import jakarta.faces.event.ActionEvent;
 import jakarta.faces.event.AjaxBehaviorEvent;
 import jakarta.inject.Named;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.Serializable;
 
 @Named
 @SessionScoped

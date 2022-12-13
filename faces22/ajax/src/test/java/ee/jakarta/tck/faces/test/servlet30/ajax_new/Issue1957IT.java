@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -23,14 +23,11 @@ import jakarta.faces.component.html.HtmlPanelGroup;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
 public class Issue1957IT extends BaseITNG {
-
+    
     /**
      * @see ClientBehaviorHolder
      * @see HtmlPanelGroup
@@ -40,11 +37,10 @@ public class Issue1957IT extends BaseITNG {
     public void testPanelGroupAjaxBehavior() throws Exception {
         WebPage page = getPage("issue1957.xhtml");
         WebElement span = page.findElement(By.id("form:group"));
-        page.waitForCondition(ExpectedConditions.elementToBeClickable(span), Duration.ofMillis(3000));
         span.click();
-        page.waitForCurrentRequestEnd();
-        assertTrue(page.getPageSource().contains("form:group Event: begin"));
-        assertTrue(page.getPageSource().contains("form:group Event: complete"));
-        assertTrue(page.getPageSource().contains("form:group Event: success"));
+        page.waitReqJs();
+        assertTrue(page.isInPage("form:group Event: begin"));
+        assertTrue(page.isInPage("form:group Event: complete"));
+        assertTrue(page.isInPage("form:group Event: success"));
     }
 }

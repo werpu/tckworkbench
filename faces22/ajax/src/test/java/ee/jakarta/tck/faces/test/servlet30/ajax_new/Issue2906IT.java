@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -49,7 +49,7 @@ public class Issue2906IT extends BaseITNG {
 
         anchor = anchors.get(8);
         anchor.click();
-        page.waitReqJs(); 
+        page.waitReqJs();
 
         anchors = page.getAnchors();
         assertTrue(page.matchesPageText(".*(4\\s+){7}4.*"));
@@ -57,7 +57,7 @@ public class Issue2906IT extends BaseITNG {
 
         anchor = anchors.get(7);
         anchor.click();
-        page.waitReqJs(); 
+        page.waitReqJs();
 
         anchors = page.getAnchors();
         assertTrue(page.matchesPageText(".*(5\\s+){6}5.*"));
@@ -65,7 +65,7 @@ public class Issue2906IT extends BaseITNG {
 
         anchor = anchors.get(0);
         anchor.click();
-        page.waitReqJs(); 
+        page.waitReqJs();
 
         anchors = page.getAnchors();
         assertTrue(page.matchesPageText(".*(6\\s+){5}6.*"));
@@ -73,12 +73,10 @@ public class Issue2906IT extends BaseITNG {
 
         anchor = anchors.get(2);
         anchor.click();
-        page.waitReqJs(); 
+        page.waitReqJs();
 
         anchors = page.getAnchors();
         assertTrue(page.matchesPageText(".*(7\\s+){4}7.*"));
         assertTrue(anchors.size() == 5);
     }
-
-
 }

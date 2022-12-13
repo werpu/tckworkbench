@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
+
 import static org.junit.Assert.assertTrue;
 
 public class Issue3106IT extends BaseITNG {
@@ -38,12 +40,12 @@ public class Issue3106IT extends BaseITNG {
         WebElement element = page.findElement(By.id("form:submit"));
 
         element.click();
-        Thread.sleep(500);
+        page.wait(Duration.ofMillis(500));
 
         page.findElement(By.id("form:submit")).click();
 
         //2 requests after that we have to move forward
-        Thread.sleep(3000);
+        page.wait(Duration.ofMillis(3000));
 
         page = getPage("multiPart1b.xhtml");
 

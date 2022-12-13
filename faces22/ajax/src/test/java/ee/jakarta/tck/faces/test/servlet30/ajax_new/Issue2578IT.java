@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Contributors to the Eclipse Foundation.
+ * Copyright (c) 1997, 2018 Oracle and/or its affiliates. All rights reserved.
  *
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License v. 2.0, which is available at
@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertTrue;
 
 public class Issue2578IT extends BaseITNG {
-
+    
     /**
      * @see AjaxBehavior
      * @see https://github.com/eclipse-ee4j/mojarra/issues/2582
@@ -48,5 +48,6 @@ public class Issue2578IT extends BaseITNG {
         page.waitReqJs();
 
         assertTrue(page.findElement(By.id("form:input")).getAttribute("value").indexOf("hello") == -1);
+
     }
 }
