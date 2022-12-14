@@ -42,7 +42,6 @@ import org.openqa.selenium.virtualauthenticator.VirtualAuthenticator;
 import org.openqa.selenium.virtualauthenticator.VirtualAuthenticatorOptions;
 
 import java.net.URI;
-import java.util.NoSuchElementException;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.BiFunction;
@@ -406,7 +405,7 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
                 return -1;
             }
             return data.responseReceived.getResponse().getStatus();
-        } catch (NoSuchElementException ex) {
+        } catch (java.util.NoSuchElementException ex) {
             return -1;
         }
     }

@@ -29,7 +29,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 
-
 public class Issue1581IT extends BaseITNG {
 
     /**

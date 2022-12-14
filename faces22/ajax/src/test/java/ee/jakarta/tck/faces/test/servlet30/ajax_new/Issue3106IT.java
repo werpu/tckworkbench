@@ -45,8 +45,8 @@ public class Issue3106IT extends BaseITNG {
         page.findElement(By.id("form:submit")).click();
 
         //2 requests after that we have to move forward
-        page.wait(Duration.ofMillis(3000));
-
+        Thread.sleep(3000);
+        updatePage();
         page = getPage("multiPart1b.xhtml");
 
         assertTrue(page.isInPageText("Count is 2"));

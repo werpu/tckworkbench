@@ -23,9 +23,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,7 +49,13 @@ public class Issue1817IT extends BaseITNG {
             page.waitReqJs();
             String expectedText = "Triggered item: " + id[1];
             WebElement body = page.findElement(By.tagName("body"));
-            page.waitForCondition(wd -> page.isInPage(expectedText), WebPage.STD_TIMEOUT);
+            try {
+
+                page.waitForCondition(wd -> page.isInPage(expectedText), WebPage.STD_TIMEOUT);
+            } catch(TimeoutException ex) {
+                // test failing. The text of triggered item shows now number
+                fail("Expected Text:" + expectedText +" not found");
+            }
             assertTrue(page.isInPage(expectedText));
         }
     }

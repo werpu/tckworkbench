@@ -38,13 +38,14 @@ public class Issue2754IT extends BaseITNG {
         WebElement button = page.findElement(By.id("button"));
         button.click();
         page.waitReqJs();
-        assertTrue(page.isInPage("input: Validation Error: Value is required"));
+        // i18n issue, error means messages are visible
+        assertTrue(page.findElements(By.cssSelector("#messages > li")).size() > 0);
         input = page.findElement(By.id("input"));
         input.sendKeys("hello");
         page.waitReqJs();
         button = page.findElement(By.id("button"));
         button.click();
         page.waitReqJs();
-        assertTrue(!page.isInPage("input: Validation Error: Value is required"));
+        assertTrue(page.findElements(By.cssSelector("#messages > li")).size() == 0);
     }
 }

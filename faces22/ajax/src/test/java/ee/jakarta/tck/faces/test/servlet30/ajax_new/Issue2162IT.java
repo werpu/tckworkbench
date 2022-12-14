@@ -47,7 +47,8 @@ public class Issue2162IT extends BaseITNG {
         button.click();
         page.waitReqJs();
 
-        
+        // init called not present probably a mojarra codebase issue
+        // showing up in Chrome - works in htmlunit!
         assertTrue(page.getPageSource().indexOf("Init called\nInit called\n") != -1);
         assertFalse(page.getPageSource().indexOf("Init called\nInit called\nInit called") != -1);
     }

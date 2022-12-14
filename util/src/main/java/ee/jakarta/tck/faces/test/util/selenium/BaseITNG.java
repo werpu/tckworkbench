@@ -18,9 +18,9 @@
 package ee.jakarta.tck.faces.test.util.selenium;
 
 import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.jboss.shrinkwrap.resolver.api.maven.PomEquippedResolveStage;
@@ -32,24 +32,29 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.Arrays;
 
+import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 import static java.util.Arrays.stream;
+import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
 
 @FunctionalInterface
 interface FileApplication {
-    void method(File file, String name);
+     void method(File workFile, String resourceName);
 }
+
 
 /**
  * Base class for tests,
  * which provides a certain infrastructure
  * can be used, but does not have to be
  */
-@RunWith(Arquillian.class)
+@RunWith(SeleniumRunner.class)
 public class BaseITNG {
 
     @ArquillianResource
@@ -98,7 +103,8 @@ public class BaseITNG {
         setProperty("finalName", "extractedTck");
 
         final WebArchive war = ShrinkWrap.create(WebArchive.class)
-                .addPackage("ee.jakarta.tck.faces.test.servlet30.ajax");
+                .addPackages(true, "ee.jakarta.tck.faces.test")
+                .addPackage(" org.glassfish.mojarra.faces40.ajax");
 
         war.addAsManifestResource(new File("src/test/resources/context.xml"), "context.xml");
         war.addAsManifestResource(new File("src/test/resources/arquillian.xml"), "arquillian.xml");

@@ -23,8 +23,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
 import static org.junit.Assert.assertTrue;
 
 public class Issue3171IT extends BaseITNG {
