@@ -27,9 +27,10 @@ public class SeleniumRunner extends Arquillian {
 
     @Override
     protected boolean isIgnored(FrameworkMethod child) {
-        if(!"true".equals(System.getProperty("test.selenium"))) {
-            return true;
-        }
+       // only needed in the ri
+       // if(!"true".equals(System.getProperty("test.selenium"))) {
+       //     return true;
+       // }
         return super.isIgnored(child);
     }
 
