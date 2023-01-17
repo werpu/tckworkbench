@@ -111,9 +111,6 @@ public class Spec790IT extends BaseITNG {
         WebElement button = page.findElement(By.id("form:button"));
         button.click();
         page.waitReqJs(Duration.ofMillis(60000));
-        System.out.println(page.getRequestData());
-        System.out.println(page.getResponseBody());
-        System.out.println(page.getPageSource());
         WebElement form1 =  page.findElement(By.id("form1"));
         ExtendedTextInput form1ViewState = new ExtendedTextInput( getWebDriver(), form1.findElement(By.name("jakarta.faces.ViewState")));
         WebElement form2 =  page.findElement(By.id("form2"));

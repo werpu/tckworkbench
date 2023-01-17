@@ -30,14 +30,16 @@
         <param-value>.xhtml</param-value>
     </context-param>
 
+
+
     <context-param>
         <param-name>jakarta.faces.FACELETS_VIEW_MAPPINGS</param-name>
-        <param-value>*.xhtml;*.jspx;*.jsf;*.faces</param-value>
+        <param-value>*.xhtml;*.jspx;*.jsf;*.faces;*.map</param-value>
     </context-param>
 
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
-        <param-value>${webapp.projectStage}</param-value>
+        <param-value>Development</param-value>
     </context-param>
     <context-param>
         <param-name>jakarta.faces.PARTIAL_STATE_SAVING</param-name>
@@ -57,12 +59,6 @@
         <param-name>org.apache.myfaces.AUTO_SCROLL</param-name>
         <param-value>true</param-value>
     </context-param>
-
-    <context-param>
-        <param-name>org.apache.myfaces.JSF_JS_MODE</param-name>
-        <param-value>normal</param-value>
-    </context-param>
-
 
     <context-param>
         <param-name>org.apache.extras.myfaces.ImplType</param-name>

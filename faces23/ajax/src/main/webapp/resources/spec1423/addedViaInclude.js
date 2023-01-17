@@ -13,6 +13,25 @@
  *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  */
-
+/**
+ * mutation observer does not work on css changes coming from external files
+ * we have to use interval for change detection
+ * The problem is here, mojarra seems to use the CSS first
+ * while MyFaces sticks to the order passed in the component descriptor
+ * so this script is executed before the CSS changes
+ * MyFaces is very likely correct here in its assumption of
+ * first come first serve of the resources
+ * @type {number}
+ */
 document.getElementById("scriptResult").innerHTML = "addedViaInclude";
-document.getElementById("stylesheetResult").innerHTML = window.getComputedStyle(document.body).getPropertyValue("background-color");
+var css = document.getElementById("stylesheetResult").innerHTML = window.getComputedStyle(document.body).getPropertyValue("background-color");
+if(!css.indexOf("rgb(0, 255, 0)") != -1) {
+    var cnt = 0;
+    var waitInterval = setInterval(function () {
+        cnt++;
+        css = document.getElementById("stylesheetResult").innerHTML = window.getComputedStyle(document.body).getPropertyValue("background-color");
+        if (cnt > 50 || css.indexOf("rgb(0, 255, 0)") != -1) {
+            clearInterval(waitInterval);
+        }
+    }, 10);
+}

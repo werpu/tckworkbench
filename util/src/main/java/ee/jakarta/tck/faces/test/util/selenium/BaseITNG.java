@@ -37,6 +37,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.Duration;
 
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
@@ -135,7 +136,8 @@ public class BaseITNG {
     protected WebPage getPage(String page) {
         webDriver.get(webUrl.toString() + page);
         WebPage webPage = new WebPage(webDriver);
-        webPage.waitForPageToLoad();
+        // Sometimes it takes longer until the first page is loaded after container startup
+        webPage.waitForPageToLoad(Duration.ofSeconds(120));
         return webPage;
     }
 
