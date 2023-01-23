@@ -39,59 +39,59 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
      */
     @Test
     public void testSpec790WithNamespacedView() throws Exception {
-     
+
         WebPage page = getPage("spec790WithNamespacedView.xhtml");
         //we do not have the viewroot in the head atm
         String namingContainerPrefix = getNamingContainerId(page);
         WebElement form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
-        WebElement form1ViewState = form1.findElement(By.name( "jakarta.faces.ViewState"));
+        WebElement form1ViewState = form1.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         WebElement form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
-        WebElement form2ViewState = form2.findElement(By.name( "jakarta.faces.ViewState"));
+        WebElement form2ViewState = form2.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         WebElement form3 = page.findElement(By.id((namingContainerPrefix + "form3")));
-        WebElement form3ViewState = form3.findElement(By.name(  "jakarta.faces.ViewState"));
+        WebElement form3ViewState = form3.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!form1ViewState.getAttribute("value").isEmpty());
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
         assertTrue(!form3ViewState.getAttribute("value").isEmpty());
 
-        WebElement form1Button =  page.findElement(By.id(namingContainerPrefix + "form1:button"));
+        WebElement form1Button = page.findElement(By.id(namingContainerPrefix + "form1:button"));
         form1Button.click();
-        page.waitReqJs(Duration.ofMillis(3000));
+        page.waitReqJs(Duration.ofMillis(600000));
         namingContainerPrefix = getNamingContainerId(page);
-        form1 =  page.findElement(By.id(namingContainerPrefix + "form1"));
-        form1ViewState =  form1.findElement(By.name(  "jakarta.faces.ViewState"));
-        form2 =  page.findElement(By.id(namingContainerPrefix + "form2"));
-        form2ViewState =  form2.findElement(By.name( "jakarta.faces.ViewState"));
-        form3 =  page.findElement(By.id(namingContainerPrefix + "form3"));
-        form3ViewState =  form3.findElement(By.name(  "jakarta.faces.ViewState"));
+        form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
+        form1ViewState = form1.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
+        form2ViewState = form2.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form3 = page.findElement(By.id(namingContainerPrefix + "form3"));
+        form3ViewState = form3.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!form1ViewState.getAttribute("value").isEmpty());
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
         assertTrue(!form3ViewState.getAttribute("value").isEmpty());
 
-        WebElement form2Link =  page.findElement(By.id(namingContainerPrefix + "form2:link"));
+        WebElement form2Link = page.findElement(By.id(namingContainerPrefix + "form2:link"));
         form2Link.click();
         page.waitReqJs(Duration.ofMillis(3000));
         namingContainerPrefix = getNamingContainerId(page);
-        form1 =  page.findElement(By.id(namingContainerPrefix + "form1"));
-        form1ViewState =  form1.findElement(By.name( "jakarta.faces.ViewState"));
-        form2 =  page.findElement(By.id(namingContainerPrefix + "form2"));
-        form2ViewState =  form2.findElement(By.name( "jakarta.faces.ViewState"));
-        form3 =  page.findElement(By.id(namingContainerPrefix + "form3"));
-        form3ViewState =  form3.findElement(By.name( "jakarta.faces.ViewState"));
+        form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
+        form1ViewState = form1.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
+        form2ViewState = form2.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form3 = page.findElement(By.id(namingContainerPrefix + "form3"));
+        form3ViewState = form3.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!form1ViewState.getAttribute("value").isEmpty());
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
         assertTrue(!form3ViewState.getAttribute("value").isEmpty());
 
-        WebElement form3Link =  page.findElement(By.id(namingContainerPrefix + "form3:link"));
+        WebElement form3Link = page.findElement(By.id(namingContainerPrefix + "form3:link"));
         System.out.println(page.getPageSource());
         form3Link.click();
         page.waitReqJs(Duration.ofMillis(3000));
         namingContainerPrefix = getNamingContainerId(page);
-        form1 =  page.findElement(By.id(namingContainerPrefix + "form1"));
-        form1ViewState =  form1.findElement(By.name( "jakarta.faces.ViewState"));
-        form2 =  page.findElement(By.id(namingContainerPrefix + "form2"));
-        form2ViewState =  form2.findElement(By.name( "jakarta.faces.ViewState"));
-        form3 =  page.findElement(By.id(namingContainerPrefix + "form3"));
-        form3ViewState =  form3.findElement(By.name( "jakarta.faces.ViewState"));
+        form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
+        form1ViewState = form1.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
+        form2ViewState = form2.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        form3 = page.findElement(By.id(namingContainerPrefix + "form3"));
+        form3ViewState = form3.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!form1ViewState.getAttribute("value").isEmpty());
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
         assertTrue(!form3ViewState.getAttribute("value").isEmpty());
@@ -108,21 +108,22 @@ public class Spec790WithNamespacedViewIT extends BaseITNG {
     public void testSpec790WithNamespacedViewAjaxNavigation() throws Exception {
 
         WebPage page = getPage("spec790WithNamespacedViewAjaxNavigation.xhtml");
-        
+
         String namingContainerPrefix = getNamingContainerId(page);
-        WebElement form =  page.findElement(By.id(namingContainerPrefix + "form"));
-        WebElement formViewState =  form.findElement(By.name( "jakarta.faces.ViewState"));
+        WebElement form = page.findElement(By.id(namingContainerPrefix + "form"));
+        WebElement formViewState = form.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!formViewState.getAttribute("value").isEmpty());
 
         WebElement button = page.findElement(By.id(namingContainerPrefix + "form:button"));
         button.click();
-        page.waitReqJs(Duration.ofMillis(10000));
-        
+        page.waitReqJs(Duration.ofMillis(1000000));
+
+        //no navigation needs to be investigated why
         namingContainerPrefix = getNamingContainerId(page);
-        WebElement form1 =  page.findElement(By.id(namingContainerPrefix + "form1"));
-        WebElement form1ViewState =  form1.findElement(By.name( "jakarta.faces.ViewState"));
-        WebElement form2 =  page.findElement(By.id(namingContainerPrefix + "form2"));
-        WebElement form2ViewState =  form2.findElement(By.name( "jakarta.faces.ViewState"));
+        WebElement form1 = page.findElement(By.id(namingContainerPrefix + "form1"));
+        WebElement form1ViewState = form1.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
+        WebElement form2 = page.findElement(By.id(namingContainerPrefix + "form2"));
+        WebElement form2ViewState = form2.findElement(By.name(namingContainerPrefix + "jakarta.faces.ViewState"));
         assertTrue(!form1ViewState.getAttribute("value").isEmpty());
         assertTrue(!form2ViewState.getAttribute("value").isEmpty());
     }

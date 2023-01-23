@@ -513,7 +513,13 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
 
         ChromeOptions options = new ChromeOptions();
 
-        options.addArguments("--headless");
+        // we can turn on a visual browser by
+        // adding chromedriver.headless = false to our properties
+        // default is headless = true
+        if(System.getProperty("chromedriver.headless") == null  ||
+        "true".equals(System.getProperty("chromedriver.headless"))) {
+            options.addArguments("--headless");
+        }
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-web-security");
         options.addArguments("--allow-insecure-localhost");
