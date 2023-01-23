@@ -41,7 +41,9 @@ import org.openqa.selenium.remote.*;
 import org.openqa.selenium.virtualauthenticator.VirtualAuthenticator;
 import org.openqa.selenium.virtualauthenticator.VirtualAuthenticatorOptions;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -50,6 +52,9 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
+
+import static java.net.URLDecoder.decode;
 
 /**
  * Extended driver which we need for getting
@@ -433,6 +438,19 @@ public class ChromeDevtoolsDriver implements ExtendedWebDriver {
     public String getRequestData() {
         HttpCycleData data = getLastGetData();
         return data.request.getPostData().orElse("");
+    }
+
+    public String[] getRequestDataAsArray() {
+        String requestData = getRequestData();
+        String[] splitted = requestData.split("\\&");
+        return Stream.of(splitted)
+                .map((String keyVal) -> {
+                    try {
+                        return URLDecoder.decode(keyVal, "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).toArray(String[]::new);
     }
 
     private HttpCycleData getLastGetData() {
