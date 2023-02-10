@@ -79,9 +79,10 @@ public class Spec1423IT extends BaseITNG {
 
         button = page.findElement(By.id("form1:addViaBody"));
         button.click();
-        page.waitReqJs(Duration.ofMillis(6000));
-        assertTrue(page.findElement(By.id("scriptResult")).getText().trim().equals("addedViaBody"));
-        assertTrue(page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(255, 0, 0)"));
+        page.waitForCondition(wd -> {
+            return  page.findElement(By.id("scriptResult")).getText().trim().equals("addedViaBody") &&
+                    page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(255, 0, 0)");
+        });
 
         button = page.findElement(By.id("form2:addViaInclude"));
         button.click();
@@ -92,30 +93,32 @@ public class Spec1423IT extends BaseITNG {
 
         button = page.findElement(By.id("form1:addProgrammatically"));
         button.click();
-        // wait for condition implictly also handles the
+        page.waitReqJs(Duration.ofMillis(6000));
+     
+        // wait for condition implicitly also handles the js
 
-        page.waitForCondition(wd -> {
-            return page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(0, 255, 0)") &&
-                    page.findElement(By.id("scriptResult")).getText().trim().equals("addedProgrammatically");
-        });
+        assertTrue(page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(0, 255, 0)"));
+        assertTrue(page.findElement(By.id("scriptResult")).getText().trim().equals("addedProgrammatically"));
+
 
 
         button = page.findElement(By.id("form1:addViaHead"));
         button.click();
         page.waitReqJs(Duration.ofMillis(6000));
-
         assertTrue(page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(0, 255, 0)"));
         assertTrue(page.findElement(By.id("scriptResult")).getText().trim().equals("addedProgrammatically"));
 
         button = page.findElement(By.id("form1:addViaBody"));
         button.click();
         page.waitReqJs(Duration.ofMillis(6000));
+     
         assertTrue(page.findElement(By.id("scriptResult")).getText().trim().equals("addedProgrammatically"));
         assertTrue(page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(0, 255, 0)"));
 
         button = page.findElement(By.id("form2:addViaInclude"));
         button.click();
         page.waitReqJs(Duration.ofMillis(6000));
+     
         assertTrue(page.findElement(By.id("scriptResult")).getText().trim().equals("addedProgrammatically"));
         assertTrue(page.findElement(By.id("stylesheetResult")).getText().trim().equals("rgb(0, 255, 0)"));
     }

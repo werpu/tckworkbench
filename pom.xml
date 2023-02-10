@@ -12,7 +12,7 @@
         <maven.compiler.target>11</maven.compiler.target>
 
         <openwebbeans.version>2.0.27</openwebbeans.version>
-        <myfaces-version>4.0.0-RC3</myfaces-version>
+        <myfaces-version>4.0.0-RC5-SNAPSHOT</myfaces-version>
         <java.source.version>1.8</java.source.version>
         <maven-compiler-plugin.version>LATEST</maven-compiler-plugin.version>
         <webapp.name>TestScripts</webapp.name>

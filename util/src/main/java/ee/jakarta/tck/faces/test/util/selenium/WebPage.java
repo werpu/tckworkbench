@@ -54,6 +54,23 @@ public class WebPage {
      * @param timeout the standard timeout to wait in case the condition is not executed
      */
     public void waitForBackgroundJavascript(Duration timeout) {
+        this.waitForBackgroundJavascript(timeout, Duration.ZERO);
+    }
+
+    /**
+     * This method fixes an issue, that even while we wait for javascripts
+     * we cannot be entirely sure that the execution has fully terminated.
+     * The problem is asynchronouse code which opens execution windows
+     * There is no way to fix this given the asynchronouse nature of the selnium drivers
+     * the best bet is simply to give the possibility of another wait delay
+     * after the supposed execution end, and also use waitForCondition with a dom
+     * check wherever possible (aka dom changes happen)
+     *
+     * @param timeout the timeout until the wait is terminated max
+     * @param delayAfterExcecution this is a delay you can add to fix those
+     *                             unfixable race conditions mentioned above
+     */
+    public void waitForBackgroundJavascript(Duration timeout, Duration delayAfterExcecution) {
         synchronized (webDriver) {
             WebDriverWait wait = new WebDriverWait(webDriver, timeout);
             double rand = Math.random();
@@ -67,7 +84,13 @@ public class WebPage {
                     "insert__.id = '" + identifier + "';" +
                     "insert__.innerHTML = 'done';" +
                     "document.body.append(insert__); resolve()}, 50);");
+            // problem is here, if the code itself has a defer somewhere we might fall
+            // into a window between two executions, this is not fully sovable I will
+            // fix this with a possible additional delay
             wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.id(identifier), 0));
+            if(!delayAfterExcecution.isZero()) {
+                wait(delayAfterExcecution);
+            }
             webDriver.getJSExecutor().executeScript("document.body.removeChild(document.getElementById('" + identifier + "'));");
         }
     }
@@ -139,7 +162,13 @@ public class WebPage {
      *                and an exceotion is thrown
      */
     public void waitReqJs(Duration timeout) {
-        // We stall the connection between browser and client for 100ms to make sure everything
+        // There is a small problem with this strategy, we do not have a 100% handle
+        // on when a script execution ends (unlike html unit which runs its own engine,
+        // selenium is a client to the browser), so we use 2 strategies, stall and insert js temporarily
+        // for execution!
+
+
+        // We stall the connection between browser and client for 200ms to make sure everything
         // is done (usually a request takes betwen 6 and 20ms)
         // Note, if you have long running request, I recommend to wait for a condition instead
         this.wait(Duration.ofMillis(200));
@@ -149,9 +178,11 @@ public class WebPage {
         // we use a trick on the cooperative multitasking to get a grip on the end of the javascript processing
         // (aka new scripts will be processed when the old ones have stopped or a timeout is issued by the scripts)
         // note, this might cause race conditions with embedded scripts
-        // for this case I can recommend to simply use waitForCondition instead, but for most cases
-        // a simple timeout suffices, given the 100ms timespan of the initial wait
-        waitForBackgroundJavascript(timeout);
+        // for this case I can recommend to simply use waitForCondition instead
+
+        // we stall the tests at another 100ms simply to make sure everything has been properly executed
+        // this reduces the chance to fall into an execution window significantly, but does not eliminate it entirely
+        waitForBackgroundJavascript(timeout, Duration.ofMillis(100));
     }
 
     /**

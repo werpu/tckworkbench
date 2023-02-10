@@ -21,7 +21,6 @@ import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.behavior.AjaxBehavior;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 
@@ -46,22 +45,19 @@ public class Issue1817IT extends BaseITNG {
                 .collect(Collectors.toList());
         for (String[] id : ids) {
             WebElement anchor = page.findElement(By.id(id[0]));
-
             anchor.click();
             page.waitReqJs();
             String expectedText = "Triggered item: " + id[1];
             WebElement body = page.findElement(By.tagName("body"));
             try {
+
                 page.waitForCondition(wd -> page.isInPage(expectedText), WebPage.STD_TIMEOUT);
             } catch(TimeoutException ex) {
                 // test failing. The text of triggered item shows now number
                 fail("Expected Text:" + expectedText +" not found");
-            } catch (StaleElementReferenceException ex) {
-                fail("Stale element");
             }
             assertTrue(page.isInPage(expectedText));
         }
-
     }
 }
 

@@ -24,8 +24,6 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -47,7 +45,7 @@ public class Issue2162IT extends BaseITNG {
 
         WebElement button = page.findElement(By.id("form:submit"));
         button.click();
-        page.waitReqJs(Duration.ofDays(1));
+        page.waitReqJs();
 
         // init called not present probably a mojarra codebase issue
         // showing up in Chrome - works in htmlunit!

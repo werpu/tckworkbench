@@ -20,9 +20,7 @@ package ee.jakarta.tck.faces.test.javaee8.ajax;
 import ee.jakarta.tck.faces.test.util.selenium.BaseITNG;
 import ee.jakarta.tck.faces.test.util.selenium.WebPage;
 import jakarta.faces.component.html.HtmlOutputText;
-import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -30,7 +28,7 @@ import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Arquillian.class)
+
 public class Issue3981IT extends BaseITNG {
 
     /**
