@@ -14,6 +14,7 @@
 
     <modules>
         <module>ajax</module>
+        <module>inputFile</module>
         <module>namespaces</module>
     </modules>
 </project>

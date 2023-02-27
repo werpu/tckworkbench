@@ -29,8 +29,8 @@ import java.util.stream.Stream;
 public class Converter {
     public static void main(String... argv) {
 
-        String sourceDir = "/Users/werpu2/IdeaProjects/faces/tck/faces40/ajax/src/test/java/ee/jakarta/tck/faces/test/servlet50/ajax/";
-        String targetDir = "/Users/werpu2/IdeaProjects/faces/tck/faces40/ajax/src/test/java/ee/jakarta/tck/faces/test/servlet50/ajax_new/";
+        String sourceDir = "/Users/werpu2/IdeaProjects/tckworkbench/faces40/viewParamNullValueAjax/src/test/java/ee/jakarta/tck/faces/test/javaee6/viewParamNullValueAjax/";
+        String targetDir = "/Users/werpu2/IdeaProjects/tckworkbench/faces40/viewParamNullValueAjax/src/test/java/ee/jakarta/tck/faces/test/javaee6/viewParamNullValueAjax_selenium/";
         try (Stream<Path> paths = Files.walk(Paths.get(sourceDir));) {
             paths.filter(path -> {
                         return path.getFileName().toString().endsWith(".java");

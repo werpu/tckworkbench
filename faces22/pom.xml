@@ -14,5 +14,6 @@
 
     <modules>
         <module>ajax</module>
+        <module>viewParamNullValueAjax</module>
     </modules>
 </project>

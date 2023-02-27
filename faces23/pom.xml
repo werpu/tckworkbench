@@ -13,6 +13,14 @@
     </parent>
 
     <modules>
+        <module>facelets</module>
+        <module>searchExpression</module>
+        <module>uiinput</module>
         <module>ajax</module>
+        <!--
+        <module>exactMapping</module>
+        <module>commandScript</module>
+        <module>cdi</module>
+        -->
     </modules>
 </project>
